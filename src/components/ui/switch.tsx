@@ -21,7 +21,9 @@ export const Switch = ({ onclick }) => {
         />
         <div
           className={`flex gap-2 items-center rounded py-2 px-[18px] text-sm font-medium ${
-            !isChecked ? "text-primary bg-[#181818]" : "text-body-color"
+            !isChecked
+              ? "text-primary bg-[#181818] dark:text-white"
+              : "text-body-color"
           }`}
         >
           <img src={GridIcon} alt="" className="w-6" />
@@ -29,7 +31,9 @@ export const Switch = ({ onclick }) => {
         </div>
         <div
           className={`flex gap-2 items-center rounded py-2 px-[18px] text-sm font-medium w-max  ${
-            isChecked ? "text-primary bg-[#181818]" : "text-body-color"
+            isChecked
+              ? "text-primary bg-[#181818] dark:text-white"
+              : "text-body-color"
           }`}
         >
           <img src={ListIcon} alt="" className="w-6" />
