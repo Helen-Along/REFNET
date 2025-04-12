@@ -3,7 +3,8 @@ export async function fetchCustomers() {
   const { data } = await supabase
     .from("users")
     .select("*")
-    .eq("role", "customer");
+    .eq("role", "customer")
+    .order("created_at", { ascending: false });
   console.log('Customer Data:', data)
   return data;
 }

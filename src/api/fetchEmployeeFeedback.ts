@@ -3,7 +3,8 @@ export async function fetchEmployeeFeedback() {
   const { data, error } = await supabase
     .from("feedback")
     .select("*, users:user_id(role)")
-    .neq("users.role", "Customer");
+    .neq("users.role", "Customer")
+    .order("created_at", { ascending: false });
   if (error) {
     throw error;
     }

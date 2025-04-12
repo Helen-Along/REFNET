@@ -1,6 +1,9 @@
 import { supabase } from '@/backend/client';
 export async function fetchUsers() {
-    const {data} = await supabase.from('users').select('*');
+    const { data } = await supabase
+      .from("users")
+      .select("*")
+      .order("created_at", { ascending: false });
     return data;
 }
 

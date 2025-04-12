@@ -1,6 +1,10 @@
 import { supabase } from "@/backend/client";
 export async function fetchProducts(count: number) {
-  const { data, error } = await supabase.from("products").select("*").limit(count);
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .limit(count)
+    .order("created_at", { ascending: false });;
   if (error) {
     throw error;
   }
