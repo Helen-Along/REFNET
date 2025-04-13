@@ -24,12 +24,6 @@ export const Route = createFileRoute("/financerecords")({
 
 const CardData = [
   {
-    icon: <Wallet size={20} color="black" />,
-    title: "Account Balance",
-    statistic: 0,
-    moreDetails: "Detailed user statistics can be found here.",
-  },
-  {
     icon: <PiggyBank size={20} color="black" />,
     title: "Incoming Payments",
     statistic: 0,
@@ -40,6 +34,12 @@ const CardData = [
     title: "Outgoing Payments",
     statistic: 0,
     moreDetails: "Detailed performance metrics are available here.",
+  },
+  {
+    icon: <Wallet size={20} color="black" />,
+    title: "Account Balance",
+    statistic: 0,
+    moreDetails: "Detailed user statistics can be found here.",
   },
   {
     icon: <SwatchBook size={20} color="black" />,
@@ -57,8 +57,8 @@ function ViewFinancialRecords() {
     fetchFinances().then((data) => {
       setFinances(data);
 
-      // Get the last row's balance for Account Balance
-      const lastBalance = data.length > 0 ? data[data.length - 1].balance : 0;
+      // Get the first row's balance for Account Balance
+      const lastBalance = data.length > 0 ? data[0].balance : 0;
       // Calculate total incoming payments
       const totalIncomingPayments = data.reduce(
         (acc, record) =>
@@ -78,15 +78,15 @@ function ViewFinancialRecords() {
       setCardData((prevCardData) =>
         prevCardData.map((card, index) => {
           if (index === 0) {
-            return { ...card, statistic: lastBalance }; // Account Balance from last row
-          } else if (index === 1) {
             return { ...card, statistic: totalIncomingPayments }; // Incoming Payments
-          } else if (index === 2) {
+          } else if (index === 1) {
             return {
               ...card,
               statistic:
-                totalOutgoingPayments === 0 ? "N/A" : totalOutgoingPayments,
+              totalOutgoingPayments === 0 ? "N/A" : totalOutgoingPayments,
             }; // Outgoing Payments
+          } else if (index === 2) {
+            return { ...card, statistic: lastBalance }; // Account Balance from last row
           } else if (index === 3) {
             return { ...card, statistic: totalReports }; // Total Reports count
           }
