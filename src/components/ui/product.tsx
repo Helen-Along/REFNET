@@ -6,11 +6,12 @@ export function ProductCard(product) {
       <div key={product.id} className="group relative">
         <div className="flex gap-4">
           <div className="w-full">
-            <h3 className="text-base font-semibold">
-              {product.name}
-            </h3>
+            <h3 className="text-base font-semibold">{product.name}</h3>
             <p className="text-sm font-base text-zinc-400">
               {product.description}
+            </p>
+            <p className="text-sm font-base py-2 px-4 bg-green-100 w-max mt-4 rounded-sm">
+              In Stock: {product.stock_quantity}
             </p>
           </div>
         </div>
