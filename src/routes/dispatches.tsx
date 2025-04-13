@@ -58,6 +58,12 @@ const CardData = [
     statistic: 0,
     moreDetails: "The total number of pending dispatches.",
   },
+  {
+    icon: <ClockArrowDown size={20} color="black" />,
+    title: "Total Assigned Dispatches",
+    statistic: 0,
+    moreDetails: "The total number of assigned dispatches.",
+  },
 ];
 
 function ViewDispatchRecords() {
@@ -71,10 +77,13 @@ function ViewDispatchRecords() {
       // Calculate total dispatches and statuses
       const totalDispatches = data.length;
       const totalCompletedDispatches = data.filter(
-        (record) => record.status === "delivered"
+        (record) => record.driver_status === "delivered"
       ).length;
       const totalPendingDispatches = data.filter(
-        (record) => record.status === "pending"
+        (record) => record.driver_status === "pending"
+      ).length;
+      const totalAssignedDispatches = data.filter(
+        (record) => record.driver_status === "accepted"
       ).length;
 
       // Update card statistics
@@ -92,6 +101,8 @@ function ViewDispatchRecords() {
             }; // Total Completed Dispatches
           } else if (index === 2) {
             return { ...card, statistic: totalPendingDispatches }; // Total Pending Dispatches
+          } else if (index === 3) {
+            return { ...card, statistic: totalAssignedDispatches }; // Total Assigned Dispatches
           }
           return card; // Unchanged cards
         })
